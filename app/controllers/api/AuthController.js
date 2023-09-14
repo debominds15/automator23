@@ -367,7 +367,7 @@ exports.addScanData = async (req, res) => {
     return res.status(422).json(validation(errors.array()));
 
   const { patientId, patientName, patientAge, height, weight, bmi, 
-    isFirstVisit, scanned_on, fhr, ga, mvp, placentaLocation, pdfUrl, summary } = req.body;
+    isFirstVisit, scanned_on, fhr, ga, mvp, placentaLocation, pdfUrl, publicId, summary } = req.body;
 
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -398,6 +398,7 @@ exports.addScanData = async (req, res) => {
       mvp: mvp,
       placentaLocation: placentaLocation,
       pdfUrl: pdfUrl,
+      publicId: publicId,
       summary: summary
     });
 
@@ -418,6 +419,7 @@ exports.addScanData = async (req, res) => {
             placentalocation: newScan.placentaLocation,
             summary: newScan.summary,
             pdfUrl: newScan.pdfUrl,
+            publicId: publicId,
             scanned_on: newScan.scanned_on
           },
         res.statusCode
