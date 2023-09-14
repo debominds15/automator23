@@ -8,6 +8,7 @@ const {
   resendVerification,
   getAuthenticatedUser,
   addScanData,
+  editScanData,
   getAllScanData,
   getAllReportData,
   getAllPatients
@@ -33,6 +34,7 @@ router.post("/login", loginValidation, login);
 router.post("/verify/resend", resendVerification);
 router.get("/", auth, getAuthenticatedUser);
 router.post("/registerscan", auth, addScanData);
+router.put('/registerscan/:scanId', auth, editScanData);
 router.get("/scan", auth, getAllScanData);
 router.get("/report", auth, getAllReportData);
 router.get("/patients", auth, getAllPatients);

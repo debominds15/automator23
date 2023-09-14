@@ -428,3 +428,57 @@ exports.addScanData = async (req, res) => {
     res.status(500).json(error("Server error", res.statusCode));
   }
 };
+
+exports.editScanData = async (req, res) => {
+  // Validation
+  console.log('Inside editScanData in controller')
+  const errors = validationResult(req);
+  if (!errors.isEmpty())
+    return res.status(422).json(validation(errors.array()));
+
+  const { patientAge, height, weight, bmi, scannedByDoctor,
+    isFirstVisit, scanned_on, fhr, ga, mvp, placentaLocation, pdfUrl, publicId, summary } = req.body;
+
+  try {
+      let updatedScan = ({
+        patientAge: patientAge,
+        height: height,
+        weight: weight,
+        bmi: bmi,
+        scannedBy: scannedByDoctor,
+        isFirstVisit: isFirstVisit,
+        scanned_on: scanned_on,
+        fhr: fhr,
+        ga: ga,
+        mvp: mvp,
+        placentaLocation: placentaLocation,
+        pdfUrl: pdfUrl,
+        publicId: publicId,
+        summary: summary
+      });
+
+      await Scan.findByIdAndUpdate(req.params.scanId, updatedScan);
+
+        // Send the response
+    res.status(201).json(
+      success(
+        "Scan successfully updated.",
+        {
+            id: updatedScan._id,
+            fhr: updatedScan.fhr,
+            ga: updatedScan.ga,
+            mvp: updatedScan.mvp,
+            placentalocation: updatedScan.placentaLocation,
+            summary: updatedScan.summary,
+            pdfUrl: updatedScan.pdfUrl,
+            publicId: publicId,
+            scanned_on: updatedScan.scanned_on
+          },
+        res.statusCode
+      )
+    );
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json(error("Server error", res.statusCode));
+  }
+};
