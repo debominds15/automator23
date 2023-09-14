@@ -41,7 +41,7 @@ exports.genReport = async (req, res) => {
 
     const { height, weight, bmi, 
         fhr, ga, placentaLocation, 
-        mvp, summary, scannedBy, isFirstVisit, isCopyReceived } = req.body;
+        mvp, summary, scannedByDoctor, isFirstVisit, isCopyReceived } = req.body;
 
 
     var docDefinition = {
@@ -276,7 +276,7 @@ exports.genReport = async (req, res) => {
               
           },
           {
-              text: scannedBy,
+              text: scannedByDoctor,
               fontSize: 12, bold: false, margin: [0, 10, 0, 8]
               
           },
