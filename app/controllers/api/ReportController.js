@@ -361,6 +361,29 @@ exports.genReport = async (req, res) => {
         }
     }
 
+    exports.deleteReport = async (req, res) => {
+        try {
+    
+        const { publicId } = req.body;
+         cloud.deleteFile(publicId).then((response) => {
+           console.log('response: ', response); 
+           const innerResult = response.result.result;
+           if (innerResult === 'ok') {
+            res.status(201).json(
+                success( "File seuccessfully deleted!",{},
+                res.statusCode
+              )
+            );
+           }
+            else
+                res.status(400).json({ message: 'File Not Found' });
+
+        }) 
+        } catch (err) {
+            console.log(err)
+            res.status(400).json({ message: 'An error occured in process' });
+        }
+    }
 /*exports.genReport = async (scan) => {
 var pdfUrl = "";   
     

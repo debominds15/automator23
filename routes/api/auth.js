@@ -16,6 +16,7 @@ const {
 
 const {
   genReport,
+  deleteReport,
   pdf
 } = require("../../app/controllers/api/ReportController");
 
@@ -39,6 +40,7 @@ router.get("/scan", auth, getAllScanData);
 router.get("/report", auth, getAllReportData);
 router.get("/patients", auth, getAllPatients);
 router.post('/generatepdf', auth, genReport);
+router.get('/deletepdf', auth, deleteReport);
 
 //router.post('/pdf', pdf);
 module.exports = router;

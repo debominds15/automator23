@@ -20,3 +20,11 @@ exports.uploads = (file) =>{
     {resource_type: "auto"})
 })
 }
+
+exports.deleteFile = (publicId) =>{
+  return new Promise(resolve => {
+    cloudinary.uploader.destroy(publicId, (result) => {
+      resolve({result: result})
+    })
+  })
+}
