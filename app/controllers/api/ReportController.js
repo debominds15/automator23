@@ -370,7 +370,7 @@ exports.genReport = async (req, res) => {
            const innerResult = response.result.result;
            if (innerResult === 'ok') {
             res.status(201).json(
-                success( "File seuccessfully deleted!",{},
+                success( "File successfully deleted!",{},
                 res.statusCode
               )
             );
